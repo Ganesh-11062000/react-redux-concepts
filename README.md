@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# Complete Guide to Redux, React-Redux and Redux-Thunk
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 3 Core Concepts of REDUX
+1) **Store** : holds the data of your application
+2) **Action** : is what tells reducer to manipulate the store data, it carries an optional payload.
+3) **Reducer** : is what manipulates that data when it recieves an action.
 
-## Available Scripts
+## 3 Principles of REDUX
+1) **Single source of truth** : The global state of your application is stored in an object tree within a single store.
+2) **State is read-only** : The only way to change the state is to emit an action, an object describing what happened.
+3) **Changes are made with pure functions** : To specify how the state tree is transformed by actions, you write pure reducers.
 
-In the project directory, you can run:
+## Let's get familiar with some terminologies !!!
+**Action is an object with type property**
 
-### `npm start`
+**Action Creators are functions which which return action objects**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Reducer is a function which takes previous state and depending upon action.type it returns a next state**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**Pure functions return same result if same arguments are passed in and it is independent of external state ( like DB,API,global variables)**
 
-### `npm test`
+## Now it's time to see how we will implement these concepts <img src="https://user-images.githubusercontent.com/44189570/112339618-d4c4d180-8ce5-11eb-9a3e-980f55527f35.png" width="20" height="20"> 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+const BUY_CAKE = 'BUY_CAKE';
+```
 
-### `npm run build`
+``` 
+function buyCake(numCakes){
+  return {
+    type: BUY_CAKE,
+    payload: numCakes
+  }
+}
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+const initialState = {
+  numOfCakes: 10
+}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+const reducer = (state = initialState, action) => {
+  switch(action.type){
+    case BUY_CAKE: return {
+      ...state,
+      numOfCakes = state.numOfCakes - action.payload,
+    }
+    default: return state
+  }
+}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+                                                                
+                                                 
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
