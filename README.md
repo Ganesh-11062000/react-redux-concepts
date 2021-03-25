@@ -54,7 +54,7 @@ const reducer = (state = initialState, action) => {
 ```
 
 This same Redux Pattern will be used everytime.   
-i.e ActionType.js => Actions (= ActionCreators) => Reducer.js
+i.e ActionType.js => Actions.js (= ActionCreators) => Reducer.js
 
 ## Wait! Where did we create the redux state Object ??
 We have seperate store.js file for holding the redux store and middleware logic.
@@ -107,7 +107,11 @@ import store from './redux/store';
 We can do this using two methods:
 1) mapStateToProps and MapDispatchToProps 
 
-mapStateToProps receives
+mapStateToProps receives redux state Object as a input parameter and returns a new object containing only required attributes from entire state.
+
+mapDispatchToProps receives dispatch as input parameter and returns and object which contains functions that dispatches only those actionCreators which are required.
+
+These two are then passed to the component using an Higher Order Component (**HOC**)
 
 ```
 const mapStateToProps = state => {
@@ -127,6 +131,17 @@ export default connect(
     mapDispatchToProps,
 )(CakeContainer);
 ```
+
+Now can retrieve state or trigger any action as follows:
+```
+function CakeContainer(props) {
+  ...
+  <h2>Number of Cakes: {props.numOfCakes}</h2>
+  <button onClick={props.buyCake}>Buy Cake</button>
+  ...
+}
+```
+
 2) useSelector and useDispatch ( using **React Hooks**)
 
 
