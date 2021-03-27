@@ -17,7 +17,7 @@
 
 **"Reducer" is a function which takes previous state and depending upon action.type it returns a next state**
 
-**"Pure" functions return same result if same arguments are passed in and it is independent of external state ( like DB,API,global variables)**
+**"Pure functions" return same result if same arguments are passed in and it is independent of external state ( like DB, API, global variables)**
 
 ## Now it's time to see how we will implement these concepts <img src="https://user-images.githubusercontent.com/44189570/112339618-d4c4d180-8ce5-11eb-9a3e-980f55527f35.png" width="20" height="20"> 
 
@@ -132,7 +132,7 @@ export default connect(
 )(CakeContainer);
 ```
 
-Now can retrieve state or trigger any action as follows:
+Now we can retrieve state or trigger any action as follows:
 ```
 function CakeContainer(props) {
   ...
@@ -144,7 +144,15 @@ function CakeContainer(props) {
 
 2) useSelector and useDispatch ( using **React Hooks**)
 
+```
+import { useSelector,useDispatch } from 'react-redux';
 
+const numOfCakes = useSelector(state => state.cake.numOfCakes);
+const dispatch = useDispatch();
+
+<h2>Number of Cakes: {numOfCakes}</h2>
+<button onClick={() => dispatch(buyCake())}>Buy Cake</button>
+```
 
 
                                                                 
